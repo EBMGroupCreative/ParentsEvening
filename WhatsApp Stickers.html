@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en" style="--highlight:#FCD5BE;--blue:#E8571E"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WhatsApp Stickers — Learn to Speak Durban</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/jszip@3.10.1/dist/jszip.min.js"></script>
+<style>
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-grotesk)}
+a{color:var(--blue)}a:hover{color:var(--ink)}
+.wrap{max-width:1280px;margin:0 auto;padding:48px 24px 80px;display:flex;flex-direction:column;gap:28px}
+.lbl{font:500 12px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{margin:0;font-size:clamp(32px,4vw,48px);letter-spacing:-.03em;line-height:1.05;text-wrap:pretty}
+.lead{margin:0;font-size:17px;line-height:1.45;color:var(--ink-2);max-width:640px;text-wrap:pretty}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.grp{display:flex;flex-wrap:wrap;gap:6px}
+.btn{appearance:none;border:0;cursor:pointer;padding:9px 15px;border-radius:999px;background:#fff;font:500 14px var(--font-grotesk);color:var(--ink)}.btn:hover{background:var(--paper-3)}.btn.on{background:var(--highlight)}
+.btn.go{background:var(--ink);color:#fff}.btn.go:hover{background:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;gap:8px}
+.frame{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background-color:#fff;background-image:linear-gradient(45deg,#ececea 25%,transparent 25%,transparent 75%,#ececea 75%),linear-gradient(45deg,#ececea 25%,transparent 25%,transparent 75%,#ececea 75%);background-size:20px 20px;background-position:0 0,10px 10px}
+.grid.chat .frame{background:#efeae2}.grid.dark .frame{background:#0b141a}
+.frame canvas{position:absolute;inset:0;width:100%;height:100%}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dl{appearance:none;border:0;background:none;padding:0;cursor:pointer;font:500 12px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.dl:hover{color:var(--ink)}
+</style></head><body>
+<div class="wrap">
+<div style="display:flex;flex-direction:column;gap:12px"><span class="lbl">WhatsApp stickers · 44 words</span><h1>Stickers. For when a paragraph is too much effort.</h1><p class="lead">Every word, selected. 512 × 512, lossless WebP, under 60 KB each, plus 2048 hi-res PNGs for WhatsApp’s own sticker maker. Two packs, because WhatsApp stops at 30. Joburg would have asked for a third.</p></div>
+<div class="bar"><div class="grp" id="bg"><button class="btn on" data-bg="">Transparent</button><button class="btn" data-bg="chat">Chat, light</button><button class="btn" data-bg="dark">Chat, dark</button></div><div class="grp" style="gap:18px"><div class="grp" id="skin"><button class="btn on" data-skin="orange">Orange</button><button class="btn" data-skin="blue">Blue</button></div><button class="btn go" id="zip">Download all (.zip)</button></div></div>
+<div class="grid" id="grid"></div>
+</div>
+<script src="ui_kits/microsite-v2/lessons.js"></script>
+<script>
+const S=512,MARGIN=16,MAXW=S-2*MARGIN-8,BASE=.30,GAP=.12,LS=-.005,PADY=.06;
+const FONT=getComputedStyle(document.body).fontFamily;
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let HL=css('--highlight')||'#cde0fb',BLUE=css('--blue')||'#0a63ff',INK=css('--ink')||'#111111';
+const slug=w=>w.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const fname=l=>`ltsd-${l.n}-${slug(l.w)}`;
+// Long words and phrases stack; each word is sized to fill the square.
+const SPLIT={'Whatkindekse':['Whatkind','ekse'],'Thundercloud':['Thunder','cloud']};
+const linesOf=w=>SPLIT[w]||w.split(' ');
+let SIZE={};
+function inkW(c,t,F){c.font=`800 ${F}px ${FONT}`;c.letterSpacing=(LS*F)+'px';const m=c.measureText(t);return{m,inkL:-m.actualBoundingBoxLeft,w:m.actualBoundingBoxRight+m.actualBoundingBoxLeft};}
+function typeSize(c,w){if(SIZE[w])return SIZE[w];let F=S;{const ls=linesOf(w);for(const t of ls){const ww=inkW(c,t,F).w+2*GAP*F+.16*F;if(ww>MAXW)F=F*MAXW/ww;}const hh=ls.length*F*(1+2*PADY)+(ls.length-1)*F*.06+.3*F;if(hh>S-2*MARGIN)F=F*(S-2*MARGIN)/hh;}return SIZE[w]=F;}
+function draw(cv,word,size=S){
+  const c=cv.getContext('2d');cv.width=cv.height=size;c.clearRect(0,0,size,size);
+  const k=size/S;c.save();c.scale(k,k);
+  const F=typeSize(c,word),ls=linesOf(word),lh=F*(1+2*PADY),lg=F*.06,H=ls.length*lh+(ls.length-1)*lg;
+  const y0=(S-H)/2;c.textBaseline='alphabetic';
+  const rows=ls.map((t,i)=>{const b=inkW(c,t,F),w=b.w+2*GAP*F;return{t,b,w,x:(S-w)/2,y:y0+i*(lh+lg)};});
+  rows.forEach(r=>{c.fillStyle=HL;c.fillRect(r.x,r.y,r.w,lh);const asc=r.b.m.fontBoundingBoxAscent??F*.8,desc=r.b.m.fontBoundingBoxDescent??F*.2;c.font=`800 ${F}px ${FONT}`;c.letterSpacing=(LS*F)+'px';c.fillStyle=INK;c.fillText(r.t,r.x+GAP*F-r.b.inkL,r.y+PADY*F+(F-(asc+desc))/2+asc);});
+  const hw=Math.max(2,.035*F),rad=.08*F,o=.01*F,f=rows[0],l=rows[rows.length-1];
+  c.fillStyle=BLUE;
+  const lx=f.x-o,rx=l.x+l.w+o-hw;
+  c.fillRect(lx,f.y,hw,lh);c.fillRect(rx,l.y,hw,lh);
+  c.beginPath();c.arc(lx+hw/2,f.y-.13*F+rad,rad,0,Math.PI*2);c.fill();
+  c.beginPath();c.arc(rx+hw/2,l.y+lh+.13*F-rad,rad,0,Math.PI*2);c.fill();
+  c.restore();return cv;
+}
+function toBlob(cv,type,q){return new Promise(r=>cv.toBlob(r,type,q));}
+async function png(word){return toBlob(draw(document.createElement('canvas'),word,2048),'image/png');}
+async function webp(word){const cv=draw(document.createElement('canvas'),word);let b=await toBlob(cv,'image/webp',1);if(!b||b.type!=='image/webp')b=await toBlob(cv,'image/png');return b;}
+function save(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+const ext=b=>b.type==='image/webp'?'webp':'png';
+const grid=document.getElementById('grid');
+grid.innerHTML=LSD_LESSONS.map((l,i)=>`<div class="card"><div class="frame"><canvas data-i="${i}"></canvas></div><div class="meta"><span class="lbl">${l.n} · Pack ${i<30?1:2}</span><span class="grp" style="gap:12px"><button class="dl" data-i="${i}">WebP</button><button class="dl" data-i="${i}" data-hi="1">Hi-res</button></span></div></div>`).join('');
+function render(){grid.querySelectorAll('canvas').forEach(cv=>draw(cv,LSD_LESSONS[+cv.dataset.i].w));}
+document.fonts.load(`800 100px ${FONT}`).then(()=>document.fonts.ready).then(()=>{SIZE={};render();});render();
+grid.onclick=async e=>{const d=e.target.closest('.dl');if(!d)return;const l=LSD_LESSONS[+d.dataset.i],b=d.dataset.hi?await png(l.w):await webp(l.w);save(b,`${fname(l)}${d.dataset.hi?'-2048':''}.${ext(b)}`);};
+const SK={orange:['#FCD5BE','#E8571E']};
+document.getElementById('skin').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#skin button').forEach(x=>x.classList.toggle('on',x===b));const s=document.documentElement.style,p=SK[b.dataset.skin];if(p){s.setProperty('--highlight',p[0]);s.setProperty('--blue',p[1]);}else{s.removeProperty('--highlight');s.removeProperty('--blue');}HL=css('--highlight');BLUE=css('--blue');render();};
+document.getElementById('bg').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#bg button').forEach(x=>x.classList.toggle('on',x===b));grid.className='grid '+b.dataset.bg;};
+document.getElementById('zip').onclick=async e=>{
+  const btn=e.currentTarget,t=btn.textContent;btn.textContent='Zipping…';
+  const z=new JSZip();
+  for(const [i,l] of LSD_LESSONS.entries()){const b=await webp(l.w);z.folder(`pack-${i<30?1:2}`).file(`${fname(l)}.${ext(b)}`,b);z.folder('hi-res').file(`${fname(l)}-2048.png`,await png(l.w));}
+  for(const [p,w] of [[1,LSD_LESSONS[0].w],[2,LSD_LESSONS[30].w]]){const cv=draw(document.createElement('canvas'),w,96);z.folder(`pack-${p}`).file('tray.png',await toBlob(cv,'image/png'));}
+  save(await z.generateAsync({type:'blob'}),`ltsd-whatsapp-stickers-${document.querySelector('#skin .on').dataset.skin}.zip`);btn.textContent=t;
+};
+</script>
+</body></html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Learn to Speak Durban — Parents’ evening</title>
+<link rel="stylesheet" href="styles.css">
+<script src="ui_kits/microsite-v2/lessons.js"></script>
+<style>
+:root{--blue:#E8571E;--blue-2:#C9440F;--accent:#E8571E;--highlight:#FCD5BE;--highlight-2:#F9BE9B;--popover-on:#FFB48F;--paper:#f4f0ea;--paper-3:#e9e3da;--paper-4:#dbd3c7}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#ddd6cc}
+body{font-family:var(--font-grotesk);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--blue);text-decoration:none}a:hover{color:var(--ink)}
+#stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;overflow:hidden;background:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.12)}
+.slide{position:absolute;inset:0;visibility:hidden;overflow:hidden;background:var(--paper) linear-gradient(#f8f5f0,#ebe5dc 1100px) no-repeat}
+.slide[data-on]{visibility:visible}
+#stage.ready .slide{display:none}#stage.ready .slide[data-on]{display:block}
+.hdr{position:absolute;left:0;right:0;top:0;height:96px;padding:0 80px;display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--border-faint);background:color-mix(in oklab,var(--paper) 84%,transparent);z-index:20}
+.brand{font:800 34px var(--font-grotesk);letter-spacing:-.015em;white-space:nowrap;display:inline-flex;align-items:baseline;gap:.24em}
+.brand .sel{padding:.02em .12em .02em .1em}.brand .sel .h{width:2px}.brand .sel .h::after{width:8px;height:8px}
+.hdr-by{display:flex;align-items:center;gap:24px}.hdr-by::before{content:'';width:1.5px;height:36px;background:var(--border-hair)}.hdr-by img{height:50px;display:block;margin:-4px 0}
+.hdr-r{margin-left:auto;display:flex;gap:12px}
+.chipx{display:inline-flex;align-items:center;gap:14px;height:60px;padding:0 24px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm);font:500 24px var(--font-grotesk);white-space:nowrap;color:var(--ink)}
+.chipx b{font:500 22px var(--font-mono);color:var(--blue);letter-spacing:.04em}
+.hl{font-family:var(--font-grotesk);font-weight:800;letter-spacing:-.02em;word-spacing:.04em;line-height:.95;text-wrap:balance}
+.lbl{font:500 24px/1.25 var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
+.muted{color:var(--ink-3)}.blue{color:var(--blue)}
+.pill{display:inline-flex;align-items:center;white-space:pre;padding:10px 20px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink);width:fit-content}
+.row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.card{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
+.lead{font-size:32px;line-height:1.42;color:var(--ink-2);text-wrap:pretty}
+.sel{position:relative;display:inline-block;padding:0 .09em 0 .07em;line-height:1.04}
+.sel.on::after{content:'';position:absolute;inset:0;background:var(--highlight);z-index:-1;pointer-events:none}
+.mark{background:linear-gradient(var(--highlight),var(--highlight)) no-repeat 0 0/100% 100%;padding:0 .06em;border-radius:.06em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl,.wall,.brand,.lead,p,h1,h2,h3{isolation:isolate}
+.sel .h{position:absolute;top:0;bottom:0;width:max(2px,.026em);background:var(--blue);z-index:1}
+.sel .h.l{left:-.01em}.sel .h.r{right:-.01em}
+.sel .h::after{content:'';position:absolute;left:50%;width:max(7px,.15em);height:max(7px,.15em);border-radius:50%;background:var(--blue);transform:translateX(-50%)}
+.sel .h.l::after{top:min(-4px,-.12em)}.sel .h.r::after{bottom:min(-4px,-.12em)}
+.pop{position:absolute;z-index:6;display:flex;background:var(--popover);border-radius:.62em;box-shadow:var(--shadow-pop);white-space:nowrap;font:500 28px/1 var(--font-grotesk);letter-spacing:0;text-transform:none;color:#fff}
+.pop::after{content:'';position:absolute;left:1.8em;border:.45em solid transparent}
+.pop.below{top:calc(100% + .8em);left:0}.pop.below::after{bottom:100%;border-bottom-color:var(--popover);border-top-width:0}
+.pop .pi{padding:.72em 1em}.pop .pi+.pi{border-left:1px solid var(--popover-2)}.pop .pi.on{color:var(--popover-on)}
+.body{position:absolute;left:80px;right:80px;top:136px;bottom:120px;display:flex;flex-direction:column;gap:36px}
+.sh{display:flex;flex-direction:column;gap:20px}
+.h2{font-size:64px}
+.st{position:absolute;left:80px;right:80px;top:136px;bottom:140px;display:flex;flex-direction:column;justify-content:center;gap:56px}
+.mnt{position:relative;display:grid;place-items:center;min-width:0;min-height:0;flex:none}
+.mnt:not([data-ok]){background:repeating-linear-gradient(135deg,#e9e3da 0 14px,#f1ece5 14px 28px);border-radius:12px}
+.cap{font:500 22px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.cap b{font-weight:500;color:var(--blue)}
+.fi{display:flex;flex-direction:column;gap:12px}
+.foot{font:800 40px/1.15 var(--font-grotesk);letter-spacing:-.015em;word-spacing:.03em;text-wrap:balance;max-width:1600px}
+.chrome{position:absolute;right:56px;bottom:32px;z-index:50;display:flex;gap:12px;align-items:center}
+.nb{appearance:none;border:0;cursor:pointer;width:72px;height:72px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm);font:500 30px/1 var(--font-grotesk);color:var(--ink);display:grid;place-items:center;transition:background .12s,transform .12s}
+.nb:hover:not(:disabled){background:var(--highlight)}.nb:active:not(:disabled){transform:scale(.96)}.nb:disabled{opacity:.35;cursor:default}
+#ntog{font:500 24px/1 var(--font-mono)}#stage.notes-on #ntog{background:var(--highlight)}
+#ctr{height:40px;padding:0 16px;gap:6px;font:500 17px var(--font-grotesk);font-variant-numeric:tabular-nums;box-shadow:none;background:transparent;color:var(--ink-3)}#ctr b{font:600 17px var(--font-mono);color:var(--blue)}
+#notes{position:absolute;left:56px;bottom:40px;max-width:960px;min-height:44px;z-index:49;display:none;align-items:center;gap:14px;padding:8px 20px 8px 16px;border-radius:12px;background:color-mix(in oklab,var(--paper) 92%,transparent);box-shadow:inset 0 0 0 1px var(--border-faint);color:var(--ink-2)}
+#notes .lbl{font-size:14px;color:var(--ink-3);flex:none}
+#notes p{font:500 17px/1.35 var(--font-grotesk);text-wrap:pretty}
+#stage.notes-on #notes{display:flex}#notes:has(p:empty){display:none!important}
+/* title */
+.hero-h>span{white-space:nowrap}.hero-h{font-size:224px;letter-spacing:-.028em;width:max-content;text-wrap:nowrap;display:flex;flex-direction:column;align-items:flex-start}.hero-h>span:first-child{margin-bottom:-.18em}.hero-h>span:nth-child(2){position:relative;z-index:1}.hero-h>.sel{margin-top:-.025em}.hero-h .kn{margin-left:.025em}
+/* points */
+.pts{display:flex;flex-direction:column}
+.pt{display:grid;grid-template-columns:96px minmax(0,1fr);gap:24px;align-items:baseline;padding:20px 0;border-top:1px solid var(--border-faint)}
+.pt:last-child{border-bottom:1px solid var(--border-faint)}
+.pt h3{font-size:42px;line-height:1.04;margin-bottom:12px}
+.pt .lead{font-size:28px}
+/* cards */
+.cards{display:grid;gap:24px;flex:1;min-height:0}
+.cards .card{padding:40px;display:flex;flex-direction:column;gap:22px}
+.cards .card .lbl{color:var(--blue);font-size:26px}
+.cards .card p{font-size:28px;line-height:1.42;color:var(--ink-2);text-wrap:pretty}
+.cards .card h3{font-size:60px;line-height:1}.cards.psy .card{padding:30px 32px;gap:12px}.cards.psy .card p{font-size:24px;line-height:1.34}.cards.own{grid-template-rows:auto auto minmax(0,1fr)}.cards.own .card{display:grid;grid-row:span 3;grid-template-rows:subgrid;justify-content:stretch;row-gap:22px}
+/* flow */
+.flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.flow .chipx{font:500 24px var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+.flow .chipx.hi{background:var(--highlight);box-shadow:none}
+.flow.trk .chipx{height:52px;padding:0 18px;font-size:21px}.flow i{font:500 28px var(--font-mono);color:var(--blue);font-style:normal}
+/* word wall */
+.wall{font:800 72px/1.22 var(--font-grotesk);letter-spacing:-.015em;word-spacing:.04em;color:var(--ink-3);text-wrap:pretty;overflow:visible}
+.wall .ww{cursor:default}.wall .ww.on{color:var(--ink)}
+/* quotes */
+.qs{display:flex;flex-direction:column}
+.q{display:grid;grid-template-columns:320px minmax(0,1fr);gap:40px;align-items:center;padding:32px 0;border-top:1px solid var(--border-faint)}
+.q:last-child{border-bottom:1px solid var(--border-faint)}
+.q .hl{font-size:60px;line-height:1.08;letter-spacing:-.018em}
+.q .chipx{justify-self:start}
+/* site frames */
+.site{overflow:hidden;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);background:var(--paper)}
+.site-bar{height:52px;display:flex;align-items:center;justify-content:center;background:var(--paper-3);border-bottom:1px solid var(--border-faint)}
+.site-bar span{background:#fff;border-radius:999px;padding:6px 20px;font:500 20px var(--font-mono);letter-spacing:.02em;color:var(--ink-2)}
+.site-vp{position:relative;overflow:hidden;background:var(--paper)}
+.site-vp iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0}
+.mpts{list-style:none;display:flex;flex-direction:column}
+.mpts li{padding:20px 0;border-top:1px solid var(--border-faint);font:500 26px/1.35 var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+.mpts li:last-child{border-bottom:1px solid var(--border-faint)}
+.mpts li b{font-weight:500;color:var(--blue)}
+/* blocks */
+.blk{display:flex;flex-direction:column;gap:10px;padding:24px 0;border-top:1px solid var(--border-faint)}
+.blk:last-child{border-bottom:1px solid var(--border-faint)}.student .blk{padding:18px 0}.student .blk .lead{font-size:27px}
+.blk .lbl{color:var(--blue)}.blk .lead{font-size:28px}
+/* layers */
+.lay{display:grid;grid-template-columns:400px minmax(0,1fr);gap:40px;align-items:baseline;padding:26px 0;border-top:1px solid var(--border-faint)}
+.lay:last-child{border-bottom:1px solid var(--border-faint)}
+.lay .lbl{color:var(--blue)}.lay .lead{font-size:30px}
+/* galleries */
+.gal{flex:1;min-height:0;display:flex}
+.gal-main{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;gap:20px}
+.gal-row{display:flex;gap:24px;align-items:flex-end}
+.gal-row .fi{gap:10px;min-width:0}
+.gal-row .cap{overflow:hidden;text-overflow:ellipsis;line-height:30px;font-size:20px}
+.duck{position:absolute;display:block;pointer-events:none}.scr{display:flex;flex-direction:column;gap:0;padding:36px 48px}.scr .r{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding:9px 0;align-items:baseline}.scr .r .who{font:500 22px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.scr .r p{font:500 28px/1.36 var(--font-grotesk);color:var(--ink);text-wrap:pretty}.scr .r.sfx p,.scr .r.dir p{color:var(--ink-3)}.scr .r.sfx .who{color:var(--ink-3)}.scr .r.vo{margin-top:10px;padding-top:18px;border-top:1px solid var(--border-faint)}.scr .r.vo p{font-weight:700}.stk canvas{width:140px;height:140px;display:block}
+@keyframes amRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes amFade{from{opacity:0}to{opacity:1}}@keyframes amMark{from{background-size:0 100%}to{background-size:100% 100%}}@keyframes amWipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.slide[data-on]{animation:amFade .7s ease-out both}
+.slide[data-on]>:is(.body,.st)>*,.slide[data-bare][data-on]>*,.slide[data-on]>.card,.slide[data-on]>img,.slide[data-on]>.mnt,.slide[data-on]>div:not(.body):not(.st):not(.hdr){animation:amRise 1.2s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.15s + var(--a,0)*.18s)}
+.slide[data-on] .am{animation:amRise 1.1s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.55s + var(--i,0)*.11s)}
+.slide[data-on] .sel.on::after{transform-origin:left center;animation:amWipe 1s cubic-bezier(.65,0,.25,1) both;animation-delay:calc(1s + var(--s,0)*.8s)}
+.slide[data-on] .mark{animation:amMark 1s cubic-bezier(.65,0,.25,1) both;animation-delay:calc(1s + var(--s,0)*.8s)}
+.slide[data-on] .sel.on>.h{animation:amFade .5s ease-out both;animation-delay:calc(1.85s + var(--s,0)*.8s)}
+.slide[data-on] .pop{animation:amRise .8s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(2.05s + var(--s,0)*.8s)}
+.slide[data-on] .hdr .sel.on::after,.slide[data-on] .hdr .sel.on>.h{animation:none!important}.wall .sel.on::after{animation-delay:0s!important;animation-duration:.35s!important}.wall .sel.on>.h{animation-delay:.3s!important}
+@media (prefers-reduced-motion:reduce){.slide *,.slide *::after,.slide>*{animation:none!important}}
+@media print{.slide *,.slide *::after,.slide>*{animation:none!important}}
+#rail{position:fixed;left:0;top:0;bottom:0;width:280px;z-index:100;background:var(--paper-3);border-right:1px solid var(--border-faint);overflow-y:auto;padding:64px 16px 24px;display:flex;flex-direction:column;gap:8px;transform:translateX(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+body.rail-on #rail{transform:none}
+#rail button{appearance:none;border:0;cursor:pointer;text-align:left;display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:baseline;padding:12px 14px;border-radius:12px;background:#fff;box-shadow:var(--shadow-sm);font:500 14px/1.3 var(--font-grotesk);color:var(--ink);transition:background .15s}
+#rail button b{font:500 12px var(--font-mono);letter-spacing:.06em;color:var(--ink-3)}
+#rail button:hover{background:var(--paper)}#rail button.on{background:var(--highlight);box-shadow:none}#rail button.on b{color:var(--blue)}
+#tools{position:fixed;top:14px;right:14px;z-index:110;display:flex;gap:6px;transition:opacity .4s}
+body.idle #tools{opacity:0;pointer-events:none}
+#tools button{appearance:none;border:0;cursor:pointer;height:34px;padding:0 14px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm);font:500 12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+#tools button:hover{background:var(--paper)}#tools button[aria-pressed="true"]{background:var(--highlight);box-shadow:none}
+#stage{transition:left .45s cubic-bezier(.16,1,.3,1)}
+@media print{#rail,#tools{display:none!important}}
+@media print{@page{size:1920px 1080px;margin:0}html,body{overflow:visible;height:auto;background:none}#stage{position:static;transform:none!important;height:auto;box-shadow:none}.slide{position:relative;visibility:visible;display:block!important;width:1920px;height:1080px;break-after:page}.chrome,#notes{display:none!important}}
+</style></head>
+<body>
+<div id="stage">
+
+<section class="slide" data-bare data-screen-label="Parents’ evening" data-note="">
+<div style="position:absolute;left:80px;top:96px;width:1040px;display:flex;flex-direction:column;gap:44px">
+<div class="row"><span class="pill lbl">Notice to parents</span><span class="lbl muted">Attn: Ms N. Sanichur · LTSD-2026</span></div>
+<h1 class="hl" style="font-size:200px;letter-spacing:-.028em;line-height:.9">Parents’ <span class="sel on">evening.</span></h1>
+<p class="lead" style="font-size:36px;max-width:960px;color:var(--ink)">Dear <span class="mark">Nishtha</span>, your child, Gateway, has been doing very well in Durban Studies. Please attend to review its coursework, its marks and its plans for next term.</p>
+</div>
+<div class="card" style="position:absolute;right:80px;top:120px;width:620px;padding:40px 44px;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:18px"><span class="lbl blue" style="font-size:22px">The details</span><img src="assets/logos/gateway-logo.png" alt="Gateway" style="height:48px;display:block"></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--border-faint);align-items:baseline"><span class="lbl muted" style="font-size:20px">Parent</span><span style="font:500 28px/1.3 var(--font-grotesk)">Nishtha Sanichur, Property Manager</span></div><div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--border-faint);align-items:baseline"><span class="lbl muted" style="font-size:20px">Child</span><span style="font:500 28px/1.3 var(--font-grotesk)">Gateway</span></div><div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--border-faint);align-items:baseline"><span class="lbl muted" style="font-size:20px">Class</span><span style="font:500 28px/1.3 var(--font-grotesk)">Dezemba 2026</span></div><div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--border-faint);align-items:baseline"><span class="lbl muted" style="font-size:20px">Teacher</span><span style="font:500 28px/1.3 var(--font-grotesk)">EBM</span></div><div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--border-faint);align-items:baseline"><span class="lbl muted" style="font-size:20px">Duration</span><span style="font:500 28px/1.3 var(--font-grotesk)">30 minutes, no detention</span></div><div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--border-faint);align-items:baseline"><span class="lbl muted" style="font-size:20px">Exam</span><span style="font:500 28px/1.3 var(--font-grotesk)">Exempt. Durbanite, fluent since birth.</span></div>
+</div>
+<div style="position:absolute;left:80px;right:80px;bottom:110px;border-top:3px dashed var(--border-hair);padding-top:28px;display:flex;align-items:flex-end;gap:48px">
+<span class="lbl muted" style="font-size:20px;white-space:nowrap">Reply slip · tear here</span>
+<p style="font:500 28px/1.3 var(--font-grotesk);flex:1">I will attend parents’ evening and, being from Durban, already know what “shap shap” means.</p>
+<div style="display:flex;flex-direction:column;gap:8px;width:420px"><span style="border-bottom:2px solid var(--ink);height:44px"></span><span class="lbl muted" style="font-size:18px">N. Sanichur · Property Manager, Gateway</span></div>
+</div>
+</section>
+<section class="slide" data-bare data-screen-label="Title" data-note="One campaign, one idea: we teach the country to speak Durban, and Gateway signs it. Thirty minutes: the thinking, the work, what Gateway gets back.">
+<div style="position:absolute;left:80px;top:120px;display:flex;flex-direction:column;gap:56px">
+<span class="pill lbl">EBM × Gateway · Parents’ evening · November 2026</span>
+<h1 class="hl hero-h"><span>Lear<span class="kn">n</span> to</span><span>sp<span class="kn">e</span><span class="kn">a</span>k</span><span class="sel on">Dur<span class="kn">b</span>an.<span class="pop below"><span class="pi">Copy</span><span class="pi">Look Up</span><span class="pi on">Translate</span></span></span></h1>
+</div>
+<div style="position:absolute;right:80px;top:120px;display:flex;flex-direction:column;align-items:flex-end;gap:28px">
+<img src="assets/logos/gateway-logo.png" alt="Gateway" style="height:120px;display:block">
+<p class="hl" style="font-size:44px;letter-spacing:-.016em">A public service by Gateway.</p>
+</div>
+</section>
+
+<section class="slide" data-screen-label="The product truth" data-note="Start here. Everything in the next half hour ladders up to this one line.">
+<div class="st"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The product truth</span></div>
+<p class="hl" style="font-size:200px;letter-spacing:-.03em;line-height:.92">Durban is <span class="sel on">the place to be.</span></p>
+<p class="lead" style="font-size:44px;max-width:1380px">December lives here. The campaign’s job is to make the country feel that — and route the feeling through Gateway.</p></div>
+</section>
+
+<section class="slide" data-screen-label="Why a mall sells the city" data-note="This is a trading-density intervention wearing a tourism coat.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The strategy</span></div><h2 class="hl h2">Why a mall sells the city, not <span class="sel on">itself.</span></h2></div>
+<div class="pts">
+<div class="pt"><span class="lbl blue">01</span><div><h3 class="hl">Nobody drives 600km to a mall. They drive to a December.</h3><p class="lead">The city is the draw; the mall is where the arrival gets collected.</p></div></div>
+<div class="pt"><span class="lbl blue">02</span><div><h3 class="hl">Destination first, venue second.</h3><p class="lead">Sell the place, own the port of entry. Gateway is the port of entry with a roof.</p></div></div>
+<div class="pt"><span class="lbl blue">03</span><div><h3 class="hl">When the city wins, the tills count it.</h3><p class="lead">More December visitors means more trading density — and turnover-linked rentals turn that into fund income.</p></div></div>
+</div>
+<p class="foot" style="margin-top:auto;font-size:38px">Durban is the draw. Once they’re here, they’ll go to a mall anyway — this campaign makes sure Gateway is the first one on their mind.</p></div>
+</section>
+
+<section class="slide" data-screen-label="The insight" data-note="The tension is the engine. We don’t sell against the rivalry; we teach it.">
+<div class="st"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The insight</span></div>
+<p class="hl" style="font-size:128px;letter-spacing:-.028em;line-height:.95">Joburg already has opinions about Durban. We gave them the <span class="sel on">vocabulary.</span></p>
+<p class="lead" style="font-size:36px;max-width:1500px">The rivalry is old and affectionate: Durban is slow, Joburg is in a hurry. The campaign doesn’t fight it — it enrols it. The jokes tease behaviour Joburgers recognise in themselves, which is exactly why they forward them.</p></div>
+</section>
+<section class="slide" data-screen-label="The psychology" data-note="The restraint is the strategy; the signature is everywhere it counts.">
+<div class="body" style="gap:26px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The psychology</span></div><h2 class="hl h2">Taught, not <span class="sel on">sold.</span></h2></div>
+<div class="cards psy" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+<div class="card"><span class="lbl">Taught ≠ sold</span><p>People skip adverts. Nobody skips a lesson with their name on the card. A course earns attention an ad has to rent.</p><p>A lesson asks for a minute and gets it; an ad asks for a second and doesn’t. The format earns time on the M1, in the inbox and in the group chat.</p><div style="margin-top:auto;padding-top:14px;border-top:1px solid var(--border-faint);display:flex;flex-direction:column;gap:6px"><span class="lbl muted" style="font-size:18px;color:var(--ink-3)">In the build</span><p style="font-size:24px;color:var(--ink)">44 lessons, daily games, a real exam on 1 Dezemba.</p></div></div>
+<div class="card"><span class="lbl">Language = belonging</span><p>44 words are a membership card. Belonging is the strongest travel motivator there is.</p><p>Knowing the local word is the difference between visiting and arriving. Every Joburger who says “shap shap” on the promenade has joined the club — and wants to be seen joining it.</p><div style="margin-top:auto;padding-top:14px;border-top:1px solid var(--border-faint);display:flex;flex-direction:column;gap:6px"><span class="lbl muted" style="font-size:18px;color:var(--ink-3)">In the build</span><p style="font-size:24px;color:var(--ink)">A student card with their name on it, faculty badges for locals, a graduation.</p></div></div>
+<div class="card"><span class="lbl">Acts get signed</span><p>Michelin built a restaurant guide to sell tyres. Guinness built a records book to settle pub arguments. Gateway built a school. The brand is the author, not the wallpaper.</p><p>Brands that do something useful get remembered as the one that did it. Gateway isn’t in the ad break; it’s on the certificate.</p><div style="margin-top:auto;padding-top:14px;border-top:1px solid var(--border-faint);display:flex;flex-direction:column;gap:6px"><span class="lbl muted" style="font-size:18px;color:var(--ink-3)">In the build</span><p style="font-size:24px;color:var(--ink)">“A public service by Gateway” on every asset; graduation and merch at the mall.</p></div></div>
+</div>
+<p class="foot">The campaign never asks to be watched. It asks to be learned — and people show their homework to each other.</p></div>
+</section>
+
+<section class="slide" data-screen-label="Why it sticks" data-note="None of this is decoration. Every mechanic in the build maps to one of these four.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The psychology · the mechanics</span></div><h2 class="hl h2">Why it <span class="sel on">sticks.</span></h2></div>
+<div class="cards own" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+<div class="card"><span class="lbl">01 · The IKEA effect</span><h3 class="hl" style="font-size:48px">Effort creates value.</h3><p>People value what they build. A word you learned is yours; a certificate you sat an exam for gets framed.</p></div>
+<div class="card"><span class="lbl">02 · Spaced repetition</span><h3 class="hl" style="font-size:48px">One word a day.</h3><p>A drip beats a blast. 44 lessons and daily games put the campaign back in memory every day of Dezemba.</p></div>
+<div class="card"><span class="lbl">03 · Social currency</span><h3 class="hl" style="font-size:48px">Look clever, share more.</h3><p>People pass on what makes them look in on the joke. Stickers, the Ekselator and tag cards are built to be passed on.</p></div>
+<div class="card" style="background:var(--highlight);box-shadow:none"><span class="lbl">04 · The goal gradient</span><h3 class="hl" style="font-size:48px">A finish line pulls.</h3><p style="color:var(--ink)">The closer the exam, the harder people push. And the finish line is at Gateway.</p></div>
+</div>
+<p class="foot">An ad has to be remembered. A course gets revised.</p></div>
+</section>
+<section class="slide" data-screen-label="The concept" data-note="A real, free course. Everything signs off: a public service by Gateway.">
+<div class="body" style="gap:32px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The concept</span></div><h2 class="hl h2" style="font-size:72px">Some people can’t speak Durban. So Gateway built them a <span class="sel on">course.</span></h2></div>
+<div class="flow"><span class="chipx">44 lessons</span><i>→</i><span class="chipx">11 games</span><i>→</i><span class="chipx">1 exam</span><i>→</i><span class="chipx">1 Dezemba</span><i>→</i><span class="chipx hi">Graduation at Gateway</span></div>
+<div class="wall" id="wall" style="flex:1;min-height:0;padding-top:8px"></div></div>
+</section>
+
+<section class="slide" data-screen-label="The student journey" data-note="The whole plan in one line: awareness in Gauteng, conversion in Durban, attribution at the counter.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The student journey</span></div><h2 class="hl h2">From the M1 to the merch <span class="sel on">counter.</span></h2></div>
+<div class="cards own" style="grid-template-columns:repeat(6,minmax(0,1fr));gap:20px">
+<div class="card" style="padding:32px"><span class="lbl" style="font-size:24px">01 · See</span><h3 class="hl" style="font-size:40px">Gauteng</h3><p style="font-size:26px">A board on the M1 at 7am.</p></div><div class="card" style="padding:32px"><span class="lbl" style="font-size:24px">02 · Enrol</span><h3 class="hl" style="font-size:40px">Gauteng</h3><p style="font-size:26px">One email. A student card with their name on it.</p></div><div class="card" style="padding:32px"><span class="lbl" style="font-size:24px">03 · Practise</span><h3 class="hl" style="font-size:40px">Anywhere</h3><p style="font-size:26px">A daily game, every day of Dezemba.</p></div><div class="card" style="padding:32px"><span class="lbl" style="font-size:24px">04 · Share</span><h3 class="hl" style="font-size:40px">Everywhere</h3><p style="font-size:26px">Stickers, Ekselator screenshots, tag cards.</p></div><div class="card" style="padding:32px"><span class="lbl" style="font-size:24px">05 · Arrive</span><h3 class="hl" style="font-size:40px">Durban</h3><p style="font-size:26px">Durban — with the vocabulary.</p></div><div class="card" style="padding:32px;background:var(--highlight);box-shadow:none"><span class="lbl" style="font-size:24px">06 · Graduate</span><h3 class="hl" style="font-size:40px">Gateway</h3><p style="font-size:26px;color:var(--ink)">At Gateway: the Study Grant redeemed, merch collected.</p></div>
+</div>
+<p class="foot">Every step hands the student to the next one. The last step has a till.</p></div>
+</section>
+<section class="slide" data-screen-label="Look and feel" data-note="The design is the idea: every asset shows a word mid-lookup — the moment of learning, frozen.">
+<div class="body" style="gap:32px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Look and feel</span></div><h2 class="hl h2">Why everything looks like a <span class="sel on">lookup.</span></h2></div>
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:720px minmax(0,1fr);gap:64px">
+<div class="card" style="padding:48px;display:flex;flex-direction:column;gap:20px">
+<span class="lbl muted">Lesson 03</span>
+<p class="hl" style="font-size:150px;line-height:1;letter-spacing:-.025em"><span class="sel on">Kiff<span class="pop below"><span class="pi">Copy</span><span class="pi on">Look Up</span><span class="pi">Translate</span></span><i class="h l"></i><i class="h r"></i></span></p>
+<div style="margin-top:auto;background:var(--paper);border-radius:var(--radius-lg);padding:28px 32px;display:flex;flex-direction:column;gap:10px"><span class="lbl blue" style="font-size:22px">Look Up · LTSD-03</span><p class="lead" style="font-size:28px;color:var(--ink)"><b>Kiff</b> (adj.) — a feeling; really, properly good.</p></div>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:center">
+<div class="blk" style="padding:18px 0;gap:8px"><span class="lbl">The selection</span><p class="lead" style="font-size:27px">The gesture everyone makes at a word they don’t know. Every asset shows a word mid-lookup.</p></div><div class="blk" style="padding:18px 0;gap:8px"><span class="lbl">Paper and cards</span><p class="lead" style="font-size:27px">The textbook and the index card, not the billboard.</p></div><div class="blk" style="padding:18px 0;gap:8px"><span class="lbl">Plain type, mono labels</span><p class="lead" style="font-size:27px">Sentence case lets the words do the shouting. Mono carries the course: lesson numbers, LTSD codes.</p></div><div class="blk" style="padding:18px 0;gap:8px"><span class="lbl">No photos, no icons</span><p class="lead" style="font-size:27px">Every surface is built from the same few parts: cheap, fast, ours.</p></div>
+</div></div>
+<p class="foot">It looks like someone looking up a word. That’s exactly what we want Joburg doing.</p></div>
+</section>
+<section class="slide" data-screen-label="The voice" data-note="Read them aloud. The humour teases behaviour, never people.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The voice · line examples</span></div><h2 class="hl h2">How it <span class="sel on">sounds.</span></h2></div>
+<div class="qs"><div class="q"><span class="chipx"><b>LTSD-21</b>Robot</span><p class="hl">“Our <span class="mark">robot</span>s have ocean views. Yours have more robots.”</p></div>
+<div class="q"><span class="chipx"><b>LTSD-14</b>Shap shap</span><p class="hl">“A paragraph means they’re cancelling. ‘<span class="mark">Shap shap</span>’ means they’re coming.”</p></div>
+<div class="q"><span class="chipx"><b>LTSD-36</b>Owens</span><p class="hl">“‘The <span class="mark">owens</span> are five minutes away.’ The owens have not left the house.”</p></div></div>
+<p class="lead" style="font-size:30px">Examples from the 44 lessons. Every word comes with its own line; lines and placements are still open.</p></div>
+</section>
+<section class="slide" data-screen-label="More line examples" data-note="Each word arrives with its own example line. The board copy writes itself.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The voice · line examples</span></div><h2 class="hl h2">More from the <span class="sel on">syllabus.</span></h2></div>
+<div class="qs"><div class="q"><span class="chipx"><b>LTSD-03</b>Kiff</span><p class="hl">“A warm ocean is <span class="mark">kiff</span>. A heated pool is a bath with admin.”</p></div>
+<div class="q"><span class="chipx"><b>LTSD-09</b>Choon</span><p class="hl">“<span class="mark">Choon</span> your boss you’re taking Friday. Notice we didn’t say ask.”</p></div>
+<div class="q"><span class="chipx"><b>LTSD-16</b>Ducking out</span><p class="hl">“Duck out on Friday. By Monday you’re a rumour with a tan.”</p></div></div>
+<p class="lead" style="font-size:30px">The joke is always on the inland habit — the meeting, the boss, the heated pool.</p></div>
+</section>
+<section class="slide" data-screen-label="Still more line examples" data-note="Forty-four lines to choose from; placement decides which one runs where.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The voice · line examples</span></div><h2 class="hl h2">Still more <span class="sel on">homework.</span></h2></div>
+<div class="qs"><div class="q"><span class="chipx"><b>LTSD-22</b>Smaak</span><p class="hl">“‘Like’ is for LinkedIn. <span class="mark">Smaak</span> is for Durban.”</p></div>
+<div class="q"><span class="chipx"><b>LTSD-18</b>Chow</span><p class="hl">“Come <span class="mark">chow</span> prawns that saw the ocean this morning. Yours flew in.”</p></div>
+<div class="q"><span class="chipx"><b>LTSD-26</b>Vaalie</span><p class="hl">“A <span class="mark">vaalie</span> packs for Durban like it has weather. It has one: nice.”</p></div></div>
+<p class="lead" style="font-size:30px">Forty-four words, forty-four lines. Pick the ones that fit the site.</p></div>
+</section>
+
+<section class="slide" data-screen-label="The Vy line" data-note="The strongest line in the course. Read it slowly — three cancellations, one destination.">
+<div class="st"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The voice · line example</span><span class="chipx"><b>LTSD-28</b>Vy</span></div>
+<p class="hl" style="font-size:132px;letter-spacing:-.03em;line-height:.98"><span class="sel on">Vy</span> the group chat from 2012. <span class="sel on">Vy</span> the gym contract. <span class="sel on">Vy</span> Joburg in Dezemba.</p>
+<p class="lead" style="font-size:36px;max-width:1300px"><b style="color:var(--ink)">Vy</b> (v.) — to leave. Lesson 28.</p></div>
+</section>
+<section class="slide" data-screen-label="Five billboards" data-note="Budget honesty: five sites, each with a distinct job; placement does half the comedy.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Joburg OOH · 1920 × 640</span></div><h2 class="hl h2">Five billboards, five jobs — the whole Joburg <span class="sel on">buy.</span></h2></div>
+<div style="display:grid;grid-template-columns:680px 680px 340px;column-gap:24px;row-gap:24px;align-content:end;flex:1">
+<div class="fi"><div class="mnt" data-src="1b · Robot" style="width:680px;height:227px"></div><span class="cap"><b>Context</b> — beside actual robots</span></div>
+<div class="fi"><div class="mnt" data-src="1c · Larney" style="width:680px;height:227px"></div><span class="cap"><b>Tease</b> — Sandton</span></div>
+<div class="fi" style="grid-column:3;grid-row:1 / span 2;margin-left:12px;width:328px;gap:24px;justify-content:flex-end"><div class="mnt" data-src="1a · Aweh" style="width:328px;height:109px"></div><p class="lead" style="font-size:25px;line-height:1.4">Site five: the Aweh launch board, N3 southbound. Boards carry the URL only — drive-by media builds memory; the click happens where people stand still.</p></div>
+<div class="fi"><div class="mnt" data-src="1d · Dala" style="width:680px;height:227px"></div><span class="cap"><b>Convert</b> — M1 morning gantry</span></div>
+<div class="fi"><div class="mnt" data-src="1e · Kiff" style="width:680px;height:227px"></div><span class="cap"><b>Product</b> — sells the sea</span></div>
+</div></div>
+</section>
+
+<section class="slide" data-screen-label="Poles and airports" data-note="Poles teach at driving speed: word, meaning, sign-off. Departures hands out the in-flight syllabus — land fluent-ish.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Street poles · airports</span></div><h2 class="hl h2">The street assembles the <span class="sel on">sentence.</span></h2></div>
+<div style="flex:1;display:flex;gap:48px;align-items:flex-end">
+<div style="display:flex;gap:20px">
+<div class="fi"><div class="mnt" data-src="2a · Set" data-i="0" style="width:370px;height:500px"></div><span class="cap">Pole 1 · the word</span></div>
+<div class="fi"><div class="mnt" data-src="2a · Set" data-i="1" style="width:370px;height:500px"></div><span class="cap">Pole 2 · the example</span></div>
+<div class="fi"><div class="mnt" data-src="2a · Set" data-i="2" style="width:370px;height:500px"></div><span class="cap">Pole 3 · the sign-off</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px">
+<div class="fi"><div class="mnt" data-src="3a · King Shaka" style="width:562px;height:187px"></div><span class="cap">King Shaka · arrivals</span></div>
+<div class="fi"><div class="mnt" data-src="3b · O.R. Tambo" style="width:562px;height:187px"></div><span class="cap">O.R. Tambo · departures</span></div>
+</div></div></div>
+</section>
+
+<section class="slide" data-screen-label="Radio" data-note="Radio finds Gauteng where it does its December dreaming: in traffic. Three spots, one lesson each, same sign-off as the boards.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Radio · 3 × 30s</span></div><h2 class="hl h2">The course, out <span class="sel on">loud.</span></h2></div>
+<div class="cards" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+<div class="card" style="justify-content:flex-end"><span class="lbl">Lesson 05 · 30s</span><h3 class="hl">Baggies</h3><p>The fragrance ad.</p></div>
+<div class="card" style="justify-content:flex-end"><span class="lbl">Lesson 13 · 30s</span><h3 class="hl">Bunny</h3><p>The crime scene.</p></div>
+<div class="card" style="justify-content:flex-end"><span class="lbl">Lesson 17 · 30s</span><h3 class="hl">The coast</h3><p>The GPS.</p></div>
+</div>
+<p class="foot">Every spot ends the way every board does: the lesson, then “A public service by Gateway.”</p></div>
+</section>
+<section class="slide" data-screen-label="Radio · Baggies" data-note="Play it like a perfume ad. The joke lands on the last line: one place.">
+<div style="position:absolute;left:80px;top:150px;width:520px;bottom:120px;display:flex;flex-direction:column;gap:36px">
+<div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Radio · 30s</span></div>
+<span class="chipx" style="width:fit-content"><b>LTSD-05</b>Lesson 5</span>
+<p class="hl" style="font-size:112px;line-height:.98"><span class="sel on">Baggies</span></p>
+<p class="hl" style="font-size:48px;line-height:1.05">The fragrance ad</p>
+</div>
+<div class="card scr" style="position:absolute;left:660px;right:80px;top:140px;max-height:820px">
+<div class="r sfx"><span class="who">SFX</span><p>Perfume-ad music. Soft waves.</p></div>
+<div class="r"><span class="who">French voice</span><p>(whispered) L’océan. Vingt-quatre degrés. And a man… wears nothing… but <span class="mark">Baggies</span>.</p></div>
+<div class="r dir"><span class="who"></span><p>(beat)</p></div>
+<div class="r"><span class="who">Voice</span><p>No neoprene. No hood. No fear. Just… polyester. And freedom.</p></div>
+<div class="r"><span class="who">Voice</span><p><span class="mark">Baggies</span>. By Durban.</p></div>
+<div class="r dir"><span class="who"></span><p>(beat)</p></div>
+<div class="r"><span class="who">Voice</span><p>Now available… wherever the water is twenty-four degrees. So. One place.</p></div>
+<div class="r vo"><span class="who">VO</span><p>Lesson five: “Baggies.” Learn to Speak Durban. A public service by Gateway.</p></div>
+</div>
+</section>
+<section class="slide" data-screen-label="Radio · Bunny" data-note="Noir, played dead straight. The crime is the fork.">
+<div style="position:absolute;left:80px;top:150px;width:520px;bottom:120px;display:flex;flex-direction:column;gap:36px">
+<div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Radio · 30s</span></div>
+<span class="chipx" style="width:fit-content"><b>LTSD-13</b>Lesson 13</span>
+<p class="hl" style="font-size:112px;line-height:.98"><span class="sel on">Bunny</span></p>
+<p class="hl" style="font-size:48px;line-height:1.05">The crime scene</p>
+</div>
+<div class="card scr" style="position:absolute;left:660px;right:80px;top:140px;max-height:820px">
+<div class="r sfx"><span class="who">SFX</span><p>Police radio crackle. Rain.</p></div>
+<div class="r"><span class="who">Detective</span><p>(gravelly) What do we got?</p></div>
+<div class="r"><span class="who">Officer</span><p>(shaken) Sir… it’s a <span class="mark">bunny</span> chow. Joburg-style.</p></div>
+<div class="r"><span class="who">Detective</span><p>How bad?</p></div>
+<div class="r"><span class="who">Officer</span><p>There’s a side salad.</p></div>
+<div class="r"><span class="who">Detective</span><p>God.</p></div>
+<div class="r"><span class="who">Officer</span><p>That’s not all, sir. (beat) A fork.</p></div>
+<div class="r"><span class="who">Detective</span><p>(long exhale) Twenty years on this beat… The bread, son. The bread IS the fork.</p></div>
+<div class="r"><span class="who">Officer</span><p>There’s a garnish, sir—</p></div>
+<div class="r"><span class="who">Detective</span><p>GET ME DURBAN ON THE PHONE.</p></div>
+<div class="r vo"><span class="who">VO</span><p>Lesson thirteen: “Bunny.” Learn to Speak Durban. A public service by Gateway.</p></div>
+</div>
+</section>
+<section class="slide" data-screen-label="Radio · The coast" data-note="Gareth is every Vaal weekend. The GPS is the voice of reason, and it drives east.">
+<div style="position:absolute;left:80px;top:150px;width:520px;bottom:120px;display:flex;flex-direction:column;gap:36px">
+<div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Radio · 30s</span></div>
+<span class="chipx" style="width:fit-content"><b>LTSD-17</b>Lesson 17</span>
+<p class="hl" style="font-size:112px;line-height:.98"><span class="sel on">The coast</span></p>
+<p class="hl" style="font-size:48px;line-height:1.05">The GPS</p>
+</div>
+<div class="card scr" style="position:absolute;left:660px;right:80px;top:140px;max-height:820px">
+<div class="r sfx"><span class="who">SFX</span><p>Car interior. Indicator ticking.</p></div>
+<div class="r"><span class="who">GPS</span><p>(posh robot) You have arrived at: the beach.</p></div>
+<div class="r"><span class="who">Gareth</span><p>See, babe? The Vaal. Basically a beach.</p></div>
+<div class="r"><span class="who">GPS</span><p>…This is a dam, Gareth.</p></div>
+<div class="r"><span class="who">Gareth</span><p>There’s sand—</p></div>
+<div class="r"><span class="who">GPS</span><p>That is mud, Gareth. For a real beach, continue six hundred kilometres east. <span class="mark">The coast</span>. The East Coast.</p></div>
+<div class="r"><span class="who">Gareth</span><p>That’s far, my petrol—</p></div>
+<div class="r"><span class="who">GPS</span><p>Start the car, Gareth. I will drive us there myself.</p></div>
+<div class="r vo"><span class="who">VO</span><p>Lesson seventeen: “The coast.” Learn to Speak Durban. A public service by Gateway.</p></div>
+</div>
+</section>
+<section class="slide" data-screen-label="The microsite" data-note="The site is real and playable today. One email to enrol.">
+<div style="position:absolute;left:80px;top:150px;width:600px;bottom:120px;display:flex;flex-direction:column;gap:44px">
+<div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The microsite</span></div><h2 class="hl h2" style="font-size:72px">The campus, open <span class="sel on">now.</span></h2></div>
+<ul class="mpts"><li>Free, no passwords</li><li>44 lessons + dictionary</li><li>The Ekselator</li><li><b>The exam</b> — locks until 1 Dezemba, server time</li></ul>
+<a class="chipx" href="https://ebmgroupcreative.github.io/LearnToSpeakDurban/#enrol" target="_blank" rel="noopener" style="width:fit-content"><b>Test link</b>Open the site →</a>
+</div>
+<div class="site" style="position:absolute;right:80px;top:140px;width:1080px"><div class="site-bar"><span>ebmgroupcreative.github.io/LearnToSpeakDurban</span></div><div class="site-vp" style="width:1080px;height:675px"><iframe data-lazy="https://ebmgroupcreative.github.io/LearnToSpeakDurban/#enrol" title="The microsite, live" tabindex="-1" style="transform:scale(.75)"></iframe></div></div>
+</section>
+
+<section class="slide" data-screen-label="Games and the Ekselator" data-note="The dailies are the return-visit machine; the Ekselator is the sharing machine.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Games · the Ekselator</span></div><h2 class="hl h2">Built to be played, built to be <span class="sel on">forwarded.</span></h2></div>
+<div style="flex:1;display:flex;gap:24px;align-items:flex-end"><div class="fi"><div class="mnt" data-src="4c · Durdle tease" style="width:273px;height:486px"></div><span class="cap">Durdle · story</span></div><div class="fi"><div class="mnt" data-src="14d · Durdle share card" style="width:486px;height:486px"></div><span class="cap">Durdle · share card</span></div><div class="fi"><div class="mnt" data-src="5c · Ekselator" style="width:389px;height:486px"></div><span class="cap">Ekselator · before / after</span></div><div class="fi"><div class="mnt" data-src="4e · Exam" style="width:273px;height:486px"></div><span class="cap">The exam · story</span></div></div>
+<p class="lead" style="font-size:28px;max-width:1500px">Dailies bring people back every day of Dezemba. The Ekselator turns office emails into screenshots — the campaign’s organic engine.</p></div>
+</section>
+
+<section class="slide" data-screen-label="The student card" data-note="Where fun and finance meet. Pool capped — exposure fixed on day one.">
+<div class="body student" style="right:620px;gap:28px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The student card</span></div><h2 class="hl h2">Identity, loyalty and the voucher in <span class="sel on">one.</span></h2></div>
+<div>
+<div class="blk"><span class="lbl">Identity</span><p class="lead">Name, chosen title, origin, enrolment date, unique student number.</p></div>
+<div class="blk"><span class="lbl">The Study Grant</span><p class="lead">Claimed on the card after enrolment, redeemed once at the counter, a one-way flip with a live timestamp. Screenshot-proof.</p></div>
+<div class="blk"><span class="lbl">Why it matters</span><p class="lead">Every redemption is a provable, logged campaign visit with minimum spend attached. The card is the attribution machine wearing a joke.</p></div>
+<div class="blk"><span class="lbl">Shared with the caption</span><p class="lead" style="font-size:26px;color:var(--ink)">“Officially enrolled in Learn to Speak Durban, a public service by Gateway. Fluency: guaranteed-ish. Forks: 0. Enrol at https://learntospeakdurban.com <span class="blue">#LearnToSpeakDurban #GatewayTheatreOfShopping</span>”</p></div>
+</div></div>
+<img src="assets/student-card-nishtha.png" alt="Student card: Nishtha Sanichur, Local" style="position:absolute;right:110px;top:118px;width:478px;height:850px;display:block;filter:drop-shadow(0 18px 40px rgba(0,0,0,.14))">
+</section>
+
+<section class="slide" data-screen-label="The email journey" data-note="Examples only. Every enrolment gets reminders and updates through Dezemba — the emails keep the database warm into January.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Email · examples</span></div><h2 class="hl h2">Enrol once. We’ll remind you <span class="sel on">daily.</span></h2></div>
+<div style="flex:1;display:flex;gap:24px;align-items:flex-end"><div class="fi"><div class="mnt" data-src="9a · Lesson email" style="width:273px;height:391px"></div><span class="cap">The daily lesson</span></div><div class="fi"><div class="mnt" data-src="9b · Welcome" style="width:273px;height:391px"></div><span class="cap">Welcome</span></div><div class="fi"><div class="mnt" data-src="9c · Halfway" style="width:273px;height:391px"></div><span class="cap">Halfway</span></div><div class="fi"><div class="mnt" data-src="9d · Exam week" style="width:273px;height:391px"></div><span class="cap">Exam week</span></div><div class="fi"><div class="mnt" data-src="9e · Results" style="width:273px;height:391px"></div><span class="cap">Results</span></div><div class="fi"><div class="mnt" data-src="9f · The nudge" style="width:273px;height:391px"></div><span class="cap">The nudge</span></div></div>
+<p class="foot">Reminders, lessons and updates from enrolment to graduation. The inbox is the classroom nobody has to remember to visit.</p></div>
+</section>
+<section class="slide" data-screen-label="In-mall" data-note="The screens teach on the way up: one word per escalator run, and the house rules on the Permanent Conditions board.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">In-mall</span></div><h2 class="hl h2" style="font-size:88px">The campus performs <span class="sel on">daily.</span></h2></div>
+<div class="gal" data-g="mall"><div class="gal-main" style="justify-content:center;align-items:center"></div></div></div>
+</section>
+
+<section class="slide" data-screen-label="Vacant shop and vinyl" data-note="Vacancy is an asset manager’s least favourite word; here it’s a lesson. Print cost only, and the frontage never reads empty.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">In-mall · vacancy and entrances</span></div><h2 class="hl h2">Even the empty shops are in <span class="sel on">class.</span></h2></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:28px">
+<div style="display:flex;gap:56px;align-items:flex-end"><div class="fi"><div class="mnt" data-src="Vacant shop hoarding" style="width:1080px;height:360px"></div><span class="cap">Vacant shop hoarding · 3000 × 1000</span></div><p class="lead" style="font-size:30px;padding-bottom:52px">A vacant frontage is dead rent with the lights on. The hoarding turns it into a live demonstration — print cost only, peeled off the day the lease signs.</p></div>
+<div class="fi"><div class="mnt" data-src="10b · Entrance vinyl" style="width:1760px;height:147px"></div><span class="cap">Entrance vinyl · every door in</span></div>
+</div></div>
+</section>
+<section class="slide" data-screen-label="The Furniture Course" data-note="Cheapest media we own: the building itself. The Walk routes feet to the merch counter.">
+<div class="body" style="gap:28px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The Furniture Course</span></div><h2 class="hl h2">The building <span class="sel on">teaches.</span></h2></div>
+<div style="flex:1;display:flex;justify-content:space-between;align-items:flex-end">
+<div class="fi"><div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:16px"><div class="mnt" data-src="Step 01" style="width:168px;height:168px"></div><div class="mnt" data-src="Step 02" style="width:168px;height:168px"></div><div class="mnt" data-src="Step 03" style="width:168px;height:168px"></div></div>
+<div class="mnt" data-src="Final decal" style="width:536px;height:268px"></div>
+<div class="mnt" data-src="Trolley handle" style="width:536px;height:54px"></div></div>
+<span class="cap">Syllabus Walk · trolley handle</span></div>
+<div class="fi"><div class="mnt" data-src="Parking bay stencil" style="width:261px;height:522px"></div><span class="cap">Parking bay</span></div>
+<div class="fi"><div style="display:flex;flex-direction:column;gap:16px"><div class="mnt" data-src="Wet floor sign" style="width:228px;height:380px"></div>
+<div style="display:flex;gap:16px"><div class="mnt" data-src="Door decal · push" style="width:106px;height:106px"></div><div class="mnt" data-src="Door decal · pull" style="width:106px;height:106px"></div></div></div>
+<span class="cap">Wet floor · doors</span></div>
+<div class="fi"><div class="mnt" data-src="Free Wi-Fi splash" style="width:293px;height:522px"></div><span class="cap">Wi-Fi splash</span></div>
+</div>
+<p class="foot">Most of this is decal money, not media money.</p></div>
+</section>
+
+<section class="slide" data-screen-label="Graduation at Gateway" data-note="The exam is online; the voucher and the merch are redeemed at Gateway only. Every redemption is a provable campaign visit.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Graduation at Gateway</span></div><h2 class="hl h2">Pass online. Collect in <span class="sel on">person.</span></h2></div>
+<div style="flex:1;display:flex;gap:24px;align-items:flex-end"><div class="fi"><img src="assets/study-grant-voucher.png" alt="Study Grant voucher" style="width:296px;height:480px;display:block;object-fit:contain"><span class="cap">Study Grant voucher</span></div><div class="fi"><div class="mnt" data-src="10e · Merch counter" style="width:677px;height:480px"></div><span class="cap">Merch counter card</span></div><div class="fi"><div class="mnt" data-src="11c · Swing tag" style="width:293px;height:480px"></div><span class="cap">Swing tag</span></div></div>
+<p class="foot">The merch is collect-at-Gateway only, against a student card. Nobody graduates by courier.</p></div>
+</section>
+<section class="slide" data-screen-label="Street and beach" data-note="The crowd already in Durban is the cheapest conversion on the plan — supply-and-drop through people already standing there.">
+<div class="body" style="gap:28px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Street level and beach level</span></div><h2 class="hl h2">Cheap, placed, <span class="sel on">true.</span></h2></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:24px">
+<div style="display:flex;gap:40px;align-items:flex-end">
+<div class="fi"><div style="display:flex;gap:12px"><div class="mnt" data-src="15a · Robot flyer 1" style="width:141px;height:300px"></div><div class="mnt" data-src="15a · Robot flyer 2" style="width:141px;height:300px"></div><div class="mnt" data-src="15a · Robot flyer 3" style="width:141px;height:300px"></div></div><span class="cap">Robot flyers</span></div>
+<div class="fi"><div class="mnt" data-src="15b · Tear-off poster" style="width:212px;height:300px"></div><span class="cap">Tear-off paste-up</span></div>
+<div class="fi"><div style="display:flex;gap:12px"><div class="mnt" data-src="17b · Flag 1" style="width:98px;height:300px"></div><div class="mnt" data-src="17b · Flag 2" style="width:98px;height:300px"></div><div class="mnt" data-src="17b · Flag 3" style="width:98px;height:300px"></div></div><span class="cap">Feather flags</span></div>
+<div class="fi"><div style="display:flex;gap:12px"><div class="mnt" data-src="17d · Bib · Parking" style="width:240px;height:300px"></div><div class="mnt" data-src="17d · Bib · Faculty" style="width:240px;height:300px"></div></div><span class="cap">Car guard bibs</span></div>
+</div>
+<div style="display:flex;gap:40px;align-items:flex-end">
+<div class="fi"><div style="display:flex;gap:12px"><div class="mnt" data-src="17a · Canopy · Kiff" style="width:237px;height:190px"></div><div class="mnt" data-src="17a · Canopy · Park" style="width:237px;height:190px"></div></div><span class="cap">Canopies</span></div>
+<div class="fi"><div class="mnt" data-src="17i · Pointing board" style="width:570px;height:190px"></div><span class="cap">Pointing board · beachfront</span></div>
+<p class="hl" style="font-size:44px;line-height:1.08;flex:1;padding-bottom:44px">“You’re at the beach. Correct. The campus is 15 minutes that way.”</p>
+</div></div></div>
+</section>
+
+<section class="slide" data-screen-label="Locals comms" data-note="Converts the host city from bystander to co-conspirator.">
+<div class="body" style="gap:40px"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Locals comms · Durban is the faculty</span></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:48px">
+<p class="hl" style="font-size:92px;max-width:880px">The syllabus came from <span class="sel on">you.</span> The course just wrote it down.</p>
+<div class="fi"><div class="mnt" data-src="16a · Durban board 1" style="width:820px;height:273px"></div><span class="cap">Durban-side board</span></div>
+</div>
+<div style="margin-top:auto;display:flex;gap:64px;align-items:flex-end">
+<div class="fi"><div style="display:flex;gap:16px"><div class="mnt" data-src="16d · Faculty" style="width:200px;height:200px"></div><div class="mnt" data-src="16d · Invigilator" style="width:200px;height:200px"></div><div class="mnt" data-src="16d · External examiner" style="width:200px;height:200px"></div><div class="mnt" data-src="16d · Fluent since birth" style="width:200px;height:200px"></div></div><span class="cap">Faculty badges · 70 mm</span></div>
+<div class="fi"><div style="display:flex;gap:16px"><div class="mnt" data-src="16g · Coaster 1" style="width:200px;height:200px"></div><div class="mnt" data-src="16g · Coaster 2" style="width:200px;height:200px"></div><div class="mnt" data-src="16g · Coaster 3" style="width:200px;height:200px"></div></div><span class="cap">Coasters · 95 mm</span></div>
+</div></div>
+</section>
+
+<section class="slide" data-screen-label="Social stories" data-note="Twelve templates, no shoots, no edits. Half are formats; half turn the story’s own mechanics into the joke.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Social · stories</span></div><h2 class="hl h2">The story is the <span class="sel on">ad.</span></h2></div>
+<div style="flex:1;display:flex;gap:24px;align-items:flex-end"><div class="fi"><div class="mnt" data-src="4a · Daily lesson" style="width:273px;height:486px"></div><span class="cap">Daily lesson</span></div><div class="fi"><div class="mnt" data-src="4b · Countdown" style="width:273px;height:486px"></div><span class="cap">Countdown</span></div><div class="fi"><div class="mnt" data-src="4c · Durdle tease" style="width:273px;height:486px"></div><span class="cap">Durdle tease</span></div><div class="fi"><div class="mnt" data-src="4f · Poll" style="width:273px;height:486px"></div><span class="cap">Poll</span></div><div class="fi"><div class="mnt" data-src="4i · Hold to pause" style="width:273px;height:486px"></div><span class="cap">Hold to pause</span></div><div class="fi"><div class="mnt" data-src="4l · Screenshot" style="width:273px;height:486px"></div><span class="cap">Screenshot</span></div></div>
+<p class="lead" style="font-size:28px;max-width:1500px">Poll, tap, hold, link, question, screenshot: the platform’s own buttons do the punchline.</p></div>
+</section>
+<section class="slide" data-screen-label="Social feed" data-note="The 44-part dictionary series is a posting calendar that writes itself. The postcard is made by users on the site.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Social · feed</span></div><h2 class="hl h2">The feed runs the <span class="sel on">syllabus.</span></h2></div>
+<div style="flex:1;display:flex;gap:24px;align-items:flex-end"><div class="fi"><div class="mnt" data-src="5a · Dictionary entry" style="width:420px;height:525px"></div><span class="cap">Dictionary entry · 44-part series</span></div><div class="fi"><div class="mnt" data-src="5b · The forecast" style="width:420px;height:525px"></div><span class="cap">The forecast</span></div><div class="fi"><div class="mnt" data-src="5c · Ekselator" style="width:420px;height:525px"></div><span class="cap">Ekselator before / after</span></div><div class="fi"><div class="mnt" data-src="5d · Postcard" style="width:420px;height:525px"></div><span class="cap">Postcard to Joburg</span></div></div>
+<p class="lead" style="font-size:28px">Forty-four words is forty-four posts. The content calendar was finished before the campaign started.</p></div>
+</section>
+<section class="slide" data-screen-label="Tag and reply cards" data-note="Every tag is a Joburger served the campaign by a friend — the most trusted media there is, at zero CPM.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Social · tag cards</span></div><h2 class="hl h2">Made to be tagged at <span class="sel on">someone.</span></h2></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:24px">
+<div style="display:flex;gap:40px;align-items:center"><div style="width:400px;flex:none;display:flex;flex-direction:column;gap:12px"><span class="lbl blue">Tag cards</span><p class="lead" style="font-size:26px">One word, one victim, one @. Built for the comments, where a friend serves the ad.</p></div><div style="display:flex;gap:16px"><div class="mnt" data-src="14a · Tag card 1" style="width:300px;height:300px"></div><div class="mnt" data-src="14a · Tag card 2" style="width:300px;height:300px"></div><div class="mnt" data-src="14a · Tag card 3" style="width:300px;height:300px"></div><div class="mnt" data-src="14a · Tag card 4" style="width:300px;height:300px"></div></div></div>
+<div style="display:flex;gap:40px;align-items:center"><div style="width:400px;flex:none;display:flex;flex-direction:column;gap:12px"><span class="lbl blue">Reply cards</span><p class="lead" style="font-size:26px">Gateway answers in the voice. The brand replies with homework, never with “thanks for your feedback”.</p></div><div style="display:flex;gap:16px"><div class="mnt" data-src="14b · Reply card 1" style="width:300px;height:300px"></div><div class="mnt" data-src="14b · Reply card 2" style="width:300px;height:300px"></div><div class="mnt" data-src="14b · Reply card 3" style="width:300px;height:300px"></div></div></div>
+</div></div>
+</section>
+<section class="slide" data-screen-label="WhatsApp stickers" data-note="Stickers live where December actually gets planned: the family group. Installed once, used all month.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">WhatsApp · 44 words · 2 packs</span></div><h2 class="hl h2">Installed in the family <span class="sel on">group.</span></h2></div>
+<div style="flex:1;display:flex;gap:56px;align-items:flex-end">
+<div class="stk" style="display:grid;grid-template-columns:repeat(11,140px);gap:12px;background:#efeae2;border-radius:18px;padding:20px;margin:0 auto"></div>
+</div></div>
+</section>
+<section class="slide" data-screen-label="Goes to work" data-note="Every install is an impression we never buy again.">
+<div class="body" style="gap:28px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">The corporate infiltration suite</span></div><h2 class="hl h2">The campaign goes to work with <span class="sel on">them.</span></h2></div>
+<div class="gal" data-g="work"><div class="gal-main"></div></div>
+<p class="foot">Assets people install — carrying the campaign into offices unpaid.</p></div>
+</section>
+
+<section class="slide" data-screen-label="ROI" data-note="Most campaigns claim visits. This one logs them.">
+<div class="body" style="gap:28px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">ROI</span></div><h2 class="hl h2">Behaviour you can <span class="sel on">count.</span></h2></div>
+<div class="cards" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+<div class="card"><span class="lbl">Vouchers</span><p>the Study Grant: issued on enrolment, redeemed once in-store, logged with a timestamp; a minimum spend puts guaranteed till revenue under every redemption; pool capped.</p></div>
+<div class="card"><span class="lbl">Merch</span><p>collect-at-Gateway only, against a student card: every collection a provable campaign visit.</p></div>
+<div class="card"><span class="lbl">Tags</span><p>every QR and short link coded per placement; the report says which surface delivered which feet.</p></div>
+<div class="card"><span class="lbl">Enrolments</span><p>consented emails, origin on every card, signup location in analytics: Gauteng demand measured before a car leaves.</p></div>
+</div>
+<div class="flow trk" style="gap:10px;flex-wrap:nowrap"><span class="lbl muted" style="margin-right:6px;font-size:22px;white-space:nowrap">Tracked, every one</span><span class="chipx">Enrolments</span><span class="chipx">Shares</span><span class="chipx">Games played</span><span class="chipx">Lessons opened</span><span class="chipx">Sticker installs</span><span class="chipx">Scans</span><span class="chipx hi">Redemptions</span></div>
+<p class="foot">Footfall and trading density against last December set the headline; redemptions are the attributed floor nobody can argue with.</p></div>
+</section>
+
+<section class="slide" data-screen-label="Brand sentiment" data-note="December’s lift is equity Gateway keeps.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Brand sentiment</span></div><h2 class="hl h2">Three <span class="sel on">layers.</span></h2></div>
+<div>
+<div class="lay"><span class="lbl">Layer 1 — Baseline</span><p class="lead">review ratings and tone, social listening, search interest, taken before teaser week.</p></div>
+<div class="lay"><span class="lbl">Layer 2 — The campaign as instrument</span><p class="lead">Durdle shares, postcards, submissions, playlist follows, badges — voluntary acts of affection, counted weekly, plus tone-coded comments and coverage.</p></div>
+<div class="lay"><span class="lbl">Layer 3 — The formal read</span><p class="lead">pre/post brand-lift in Gauteng and KZN; budget-light fallback: intercepts plus a two-question site pop-up.</p></div>
+</div>
+</div>
+</section>
+
+<section class="slide" data-screen-label="Why sentiment pays" data-note="Behaviour is the floor; sentiment is the compounding. A December visitor who liked us is a March visitor we didn’t pay for.">
+<div class="body" style="gap:28px"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">Sentiment · why it pays</span></div><h2 class="hl h2">Feet and vouchers prove behaviour. Sentiment proves <span class="sel on">durability.</span></h2></div>
+<div class="cards own" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+<div class="card"><span class="lbl">01 · Return visits</span><h3 class="hl" style="font-size:40px">One trip becomes a habit.</h3><p>A December visitor who liked Gateway comes back in March. Goodwill keeps footfall coming after the campaign stops paying for it.</p></div>
+<div class="card"><span class="lbl">02 · Cheaper next year</span><h3 class="hl" style="font-size:40px">Liked brands buy less media.</h3><p>Every point of warmth this December lowers what it costs to fill the mall next Dezemba. Term 2 starts warm, not cold.</p></div>
+<div class="card"><span class="lbl">03 · Tenant pull</span><h3 class="hl" style="font-size:40px">Tenants follow reputation.</h3><p>A mall people talk about warmly is an easier leasing conversation — and an easier renewal.</p></div>
+<div class="card" style="background:var(--highlight);box-shadow:none"><span class="lbl">04 · Resilience</span><h3 class="hl" style="font-size:40px">A spike vs. an asset.</h3><p style="color:var(--ink)">Footfall bought with promotions leaves with them. Footfall that likes you holds. That is the difference a valuer can see.</p></div>
+</div>
+<p class="foot">Vouchers count this December. Sentiment pays for the next ten.</p></div>
+</section>
+<section class="slide" data-screen-label="What Gateway owns" data-note="This spend builds things the fund owns after the music stops.">
+<div class="body"><div class="sh"><div class="row"><span class="pill lbl" data-n></span><span class="lbl muted">After the music stops</span></div><h2 class="hl h2">What Gateway owns on 1 <span class="sel on">January.</span></h2></div>
+<div class="cards own" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+<div class="card" style="background:var(--highlight);box-shadow:none"><span class="lbl">01</span><h3 class="hl">The database</h3><p></p></div>
+<div class="card"><span class="lbl">02</span><h3 class="hl">The channels</h3><p>WhatsApp audience, the playlist, Gateway’s own accounts.</p></div>
+<div class="card"><span class="lbl">03</span><h3 class="hl">The school</h3><p>Site, games, voice — Term 2 in January, re-enrolment next Dezemba at a fraction of the build.</p></div>
+<div class="card"><span class="lbl">04</span><h3 class="hl">The goodwill</h3><p>Faculty badges, a city cast as teachers, the earned-media record.</p></div>
+</div></div>
+</section>
+
+<section class="slide" data-bare data-screen-label="Close" data-note="">
+<div class="st" style="top:80px;gap:64px">
+<p class="hl" style="font-size:380px;letter-spacing:-.04em;line-height:.85"><span class="sel on">Aweh.<span class="pop below"><span class="pi">Copy</span><span class="pi on">Look Up</span><span class="pi">Translate</span></span></span></p>
+<p class="hl" style="font-size:72px;letter-spacing:-.022em;line-height:1.05;margin-top:72px;max-width:1300px">The water’s warm. The school is built. We’d like to open it.</p>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px">
+<p class="hl" style="font-size:44px;letter-spacing:-.016em;line-height:1.15">— Learn to Speak Durban. A public service by Gateway.<br><a href="https://ebmgroupcreative.github.io/LearnToSpeakDurban/#enrol" target="_blank" rel="noopener">learntospeakdurban.com</a></p>
+<img src="assets/logos/gateway-logo.png" alt="Gateway" style="height:120px;display:block;margin-right:340px">
+</div></div>
+</section>
+
+<section class="slide" data-bare data-screen-label="Thank you" data-note="">
+<div style="position:absolute;left:80px;top:96px;width:820px;bottom:110px;display:flex;flex-direction:column;gap:40px">
+<div class="row"><span class="pill lbl">Parents’ evening · adjourned</span></div>
+<p class="hl" style="font-size:150px;letter-spacing:-.03em;line-height:.92">Thank you, <span class="sel on">Nishtha.</span></p>
+<p class="lead" style="font-size:34px;color:var(--ink)">For the time, the patience and the tea. Your child is doing well, and wants to spend December showing off. We’d like to let it.</p>
+<img src="assets/logos/gateway-logo.png" alt="Gateway" style="height:100px;width:fit-content;display:block;margin-top:auto">
+</div>
+<div class="card" style="position:absolute;right:80px;top:96px;width:860px;padding:36px 44px 32px;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:16px"><span class="hl" style="font-size:48px">Report card</span><span class="lbl blue" style="font-size:20px">Term: Dezemba 2026</span></div>
+<div style="display:flex;gap:40px;padding-bottom:16px"><span class="lbl muted" style="font-size:18px">Learner: Gateway</span><span class="lbl muted" style="font-size:18px">Parent: N. Sanichur</span></div>
+<div style="display:grid;grid-template-columns:250px 90px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--border-faint)"><span style="font:600 26px/1.2 var(--font-grotesk)">Durban Studies</span><span class="hl" style="font-size:44px;line-height:1;color:var(--blue)">A+</span><span style="font:500 22px/1.3 var(--font-grotesk);color:var(--ink-2)">Fluent-ish. Improving daily.</span></div><div style="display:grid;grid-template-columns:250px 90px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--border-faint)"><span style="font:600 26px/1.2 var(--font-grotesk)">Social Studies</span><span class="hl" style="font-size:44px;line-height:1;color:var(--blue)">A+</span><span style="font:500 22px/1.3 var(--font-grotesk);color:var(--ink-2)">Shares everything. Encouraged.</span></div><div style="display:grid;grid-template-columns:250px 90px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--border-faint)"><span style="font:600 26px/1.2 var(--font-grotesk)">Footfall</span><span class="hl" style="font-size:44px;line-height:1;color:var(--blue)">A+</span><span style="font:500 22px/1.3 var(--font-grotesk);color:var(--ink-2)">Brings friends. Lots of them.</span></div><div style="display:grid;grid-template-columns:250px 90px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--border-faint)"><span style="font:600 26px/1.2 var(--font-grotesk)">Trading Density</span><span class="hl" style="font-size:44px;line-height:1;color:var(--blue)">A+</span><span style="font:500 22px/1.3 var(--font-grotesk);color:var(--ink-2)">The tills report good behaviour.</span></div><div style="display:grid;grid-template-columns:250px 90px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--border-faint)"><span style="font:600 26px/1.2 var(--font-grotesk)">Attendance</span><span class="hl" style="font-size:44px;line-height:1;color:var(--blue)">A+</span><span style="font:500 22px/1.3 var(--font-grotesk);color:var(--ink-2)">Present every day of Dezemba.</span></div><div style="display:grid;grid-template-columns:250px 90px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--border-faint)"><span style="font:600 26px/1.2 var(--font-grotesk)">Punctuality</span><span class="hl" style="font-size:44px;line-height:1;color:var(--blue)">A+</span><span style="font:500 22px/1.3 var(--font-grotesk);color:var(--ink-2)">Says “shap shap”. Arrives eventually. Still counts.</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:8px;padding:18px 24px;border-radius:var(--radius-lg);background:var(--highlight)"><span class="lbl" style="font-size:20px">Overall</span><span class="hl" style="font-size:64px;line-height:1">A+</span><span style="font:600 24px/1.25 var(--font-grotesk)">Promoted to Term 2.</span></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:20px"><div style="display:flex;flex-direction:column;gap:6px"><span class="lbl muted" style="font-size:18px">Teacher’s comment</span><span style="font:600 26px/1.25 var(--font-grotesk)">Shows promise. Talks a lot in class. Shap shap.</span></div><span class="lbl muted" style="font-size:18px;white-space:nowrap">— EBM</span></div>
+</div>
+</section>
+
+<div id="notes"><span class="lbl">Notes</span><p></p></div>
+<div class="chrome"><span class="chipx" id="ctr"></span></div>
+</div>
+
+<nav id="rail" aria-label="Slides"></nav>
+<div id="tools"><button type="button" id="tRail" aria-pressed="false" title="Slides (S)">Slides</button><button type="button" id="tNotes" aria-pressed="false" title="Notes (N)">Notes</button><button type="button" id="tFull" aria-pressed="false" title="Fullscreen (F)">Fullscreen</button></div>
+<script src="asset-deck.js"></script>
+</body></html>
